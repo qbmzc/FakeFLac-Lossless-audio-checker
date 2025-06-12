@@ -772,6 +772,88 @@ if __name__ == '__main__':
     Window.left = 0
     Window.minimum_height = 640
 
+    # 注册支持中文的字体
+    from kivy.core.text import LabelBase
+    import os
+    import subprocess
+    
+    # 尝试查找系统中的中文字体
+    def find_chinese_font():
+        # 常见的中文字体路径
+        common_chinese_fonts = [
+            # Noto Sans CJK
+            '/usr/share/fonts/noto-cjk/NotoSansCJK-Regular.ttc',
+            '/usr/share/fonts/noto-cjk/NotoSansSC-Regular.otf',
+            # WenQuanYi
+            '/usr/share/fonts/wenquanyi/wqy-microhei/wqy-microhei.ttc',
+            '/usr/share/fonts/wenquanyi/wqy-zenhei/wqy-zenhei.ttc',
+            # Sarasa Gothic
+            '/usr/share/fonts/sarasa-gothic/sarasa-ui-sc-regular.ttf',
+            # Droid Sans Fallback
+            '/usr/share/fonts/droid/DroidSansFallbackFull.ttf',
+            # Source Han Sans
+            '/usr/share/fonts/adobe-source-han-sans/SourceHanSansSC-Regular.otf',
+        ]
+        
+        # 检查常见字体是否存在
+        for font_path in common_chinese_fonts:
+            if os.path.exists(font_path):
+                return font_path
+        
+        # 如果常见字体都不存在，尝试使用fc-list查找中文字体
+        try:
+            output = subprocess.check_output(['fc-list', ':lang=zh', 'file']).decode('utf-8')
+            font_paths = output.strip().split('\n')
+            if font_paths:
+                # 提取第一个字体路径
+                font_path = font_paths[0].split(':')[0].strip()
+                if os.path.exists(font_path):
+                    return font_path
+        except Exception as e:
+            print(f"使用fc-list查找中文字体失败: {e}")
+        
+        # 如果还是找不到，尝试在常见目录中查找任何可能的中文字体
+        font_dirs = [
+            '/usr/share/fonts/noto-cjk',
+            '/usr/share/fonts/sarasa-gothic',
+            '/usr/share/fonts/wenquanyi',
+            '/usr/share/fonts/adobe-source-han-sans',
+            '/usr/share/fonts',
+            '/usr/local/share/fonts',
+            os.path.expanduser('~/.local/share/fonts')
+        ]
+        
+        for font_dir in font_dirs:
+            if os.path.exists(font_dir):
+                for root, dirs, files in os.walk(font_dir):
+                    for file in files:
+                        if file.endswith(('.ttc', '.ttf', '.otf')):
+                            # 优先选择包含中文相关关键字的字体
+                            keywords = ['cjk', 'sc', 'cn', 'hans', 'hei', 'kai', 'song', 'ming', 'gothic']
+                            file_lower = file.lower()
+                            if any(keyword in file_lower for keyword in keywords):
+                                return os.path.join(root, file)
+        
+        # 如果还是找不到，返回None
+        return None
+    
+    # 尝试注册中文字体
+    chinese_font = find_chinese_font()
+    if chinese_font:
+        try:
+            # 注册找到的中文字体作为默认字体
+            LabelBase.register(name='Roboto', fn_regular=chinese_font)
+            print(f"已注册中文字体: {chinese_font}")
+        except Exception as e:
+            print(f"注册中文字体失败: {e}")
+    else:
+        print("未找到可用的中文字体，界面可能无法正确显示中文")
+        
+    # 设置Kivy的字体回退机制
+    from kivy.config import Config
+    Config.set('kivy', 'default_font', ['Roboto', 'data/fonts/NotoSansCJK-Regular.ttc'])
+
+
     plt.style.use('dark_background')
     plt.rcParams['text.color'] = 'white'
     
