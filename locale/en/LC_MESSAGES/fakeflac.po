@@ -1,0 +1,165 @@
+# FakeFlac Lossless Audio Checker English Translation
+# Copyright (C) 2023
+# This file is distributed under the same license as the FakeFlac package.
+
+msgid ""
+msgstr ""
+"Project-Id-Version: FakeFlac 1.0\n"
+"POT-Creation-Date: 2023-07-01 12:00+0000\n"
+"PO-Revision-Date: 2023-07-01 12:00+0000\n"
+"Last-Translator: Auto <auto@example.com>\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# Main UI
+msgid "Lossless audio checker"
+msgstr "Lossless audio checker"
+
+msgid "Choose option"
+msgstr "Choose option"
+
+msgid "Compare audio \nwith its fake high resolution"
+msgstr "Compare audio \nwith its fake high resolution"
+
+msgid "Limit audio to 45s"
+msgstr "Limit audio to 45s"
+
+msgid "Choose Bitrate\n Default=320k"
+msgstr "Choose Bitrate\n Default=320k"
+
+msgid "Selected bitrate:"
+msgstr "Selected bitrate:"
+
+msgid "To check lossless audio do not change\ndefault bitrate"
+msgstr "To check lossless audio do not change\ndefault bitrate"
+
+msgid "Open spectogram for one file"
+msgstr "Open spectogram for one file"
+
+msgid "How it works"
+msgstr "How it works"
+
+msgid "Your audio file:"
+msgstr "Your audio file:"
+
+msgid "Converted file:"
+msgstr "Converted file:"
+
+msgid "Play the differnce between High-Low res audio:"
+msgstr "Play the differnce between High-Low res audio:"
+
+# Status messages
+msgid "Opening the difference audio, please wait"
+msgstr "Opening the difference audio, please wait"
+
+msgid "Choose audio file for lossles check"
+msgstr "Choose audio file for lossles check"
+
+msgid "Open new file, which will be converted to this bitrate"
+msgstr "Open new file, which will be converted to this bitrate"
+
+msgid "Opening original audio"
+msgstr "Opening original audio"
+
+msgid "Limiting audio to 45seconds"
+msgstr "Limiting audio to 45seconds"
+
+msgid "Whole audio selected"
+msgstr "Whole audio selected"
+
+msgid "Opening fake \"Lossless\" audio\nSometimes takes a little longer"
+msgstr "Opening fake \"Lossless\" audio\nSometimes takes a little longer"
+
+msgid "Saving lower-quiality audio"
+msgstr "Saving lower-quiality audio"
+
+msgid " Succesfully Saved"
+msgstr " Succesfully Saved"
+
+msgid "Error while saving audio"
+msgstr "Error while saving audio"
+
+msgid "No file was selected"
+msgstr "No file was selected"
+
+msgid "Opening: "
+msgstr "Opening: "
+
+msgid " and calculating spectograms\nPlease wait"
+msgstr " and calculating spectograms\nPlease wait"
+
+msgid "Done, duration: "
+msgstr "Done, duration: "
+
+msgid " seconds\nChoose an option or open new file"
+msgstr " seconds\nChoose an option or open new file"
+
+msgid "Most used highest frequencies (from 14KHz+): "
+msgstr "Most used highest frequencies (from 14KHz+): "
+
+msgid "\nThis value should be higher"
+msgstr "\nThis value should be higher"
+
+msgid "Too small frequencies found"
+msgstr "Too small frequencies found"
+
+msgid "Most used highest frequencies (from "
+msgstr "Most used highest frequencies (from "
+
+msgid "KHz+): "
+msgstr "KHz+): "
+
+msgid "\nThis value should be lower"
+msgstr "\nThis value should be lower"
+
+msgid "Opening spectogram for file: "
+msgstr "Opening spectogram for file: "
+
+# File dialogs
+msgid "Audio Files"
+msgstr "Audio Files"
+
+msgid "All Files"
+msgstr "All Files"
+
+msgid "MP3 files"
+msgstr "MP3 files"
+
+# Examples and help
+msgid "Example of lossless audio: (Up to 22KHz)"
+msgstr "Example of lossless audio: (Up to 22KHz)"
+
+msgid "Example of lossy compression (196k) (Up to 19KHz):"
+msgstr "Example of lossy compression (196k) (Up to 19KHz):"
+
+msgid "Show me example of lossles audio check (Real flac)"
+msgstr "Show me example of lossles audio check (Real flac)"
+
+msgid "Show me example of lossy audio check (Fake flac)"
+msgstr "Show me example of lossy audio check (Fake flac)"
+
+msgid "Example of lossless audio check:"
+msgstr "Example of lossless audio check:"
+
+msgid "Example of lossy (fake flac)audio check:"
+msgstr "Example of lossy (fake flac)audio check:"
+
+msgid "Back"
+msgstr "Back"
+
+msgid "Show me example"
+msgstr "Show me example"
+
+# Help text
+msgid " There is no way to check if audio is truly lossless if you do not have the original file\n\nOne way to determine this is by looking at the spectrogram of the file and finding the cutoff.\n\n\nSome audio files have a lower cutoff frequency, but this doesn't mean they're not lossless.\n\nThis program compares the spectrogram of your audio file to a fake \"lossless\" version.\n\nIf there's a difference, the audio file is likely lossless.\n\nMost used highest friequencies are also displayed, if these values match you are probably dealing with fake lossless compression.\n\n\nUse the \"Compare audio with its fake resolution\" option for this. You can limit the audio to 45 seconds for faster processing.\n\n\n!!Please note that changing the bitrate to lower settings won't show you if the audio is truly lossless!!\n\n\nYou can play both the original and the lower-quality audio and save the lower-quality audio as an MP3 file.\n\nYou can play the difference between those two (+- What you are missing by compressing the audio)\n\n\nYou can also view the spectrogram of a single file using the \"Open spectrogram for one file\" option.\n\n\n\n\n        "
+msgstr " There is no way to check if audio is truly lossless if you do not have the original file\n\nOne way to determine this is by looking at the spectrogram of the file and finding the cutoff.\n\n\nSome audio files have a lower cutoff frequency, but this doesn't mean they're not lossless.\n\nThis program compares the spectrogram of your audio file to a fake \"lossless\" version.\n\nIf there's a difference, the audio file is likely lossless.\n\nMost used highest friequencies are also displayed, if these values match you are probably dealing with fake lossless compression.\n\n\nUse the \"Compare audio with its fake resolution\" option for this. You can limit the audio to 45 seconds for faster processing.\n\n\n!!Please note that changing the bitrate to lower settings won't show you if the audio is truly lossless!!\n\n\nYou can play both the original and the lower-quality audio and save the lower-quality audio as an MP3 file.\n\nYou can play the difference between those two (+- What you are missing by compressing the audio)\n\n\nYou can also view the spectrogram of a single file using the \"Open spectrogram for one file\" option.\n\n\n\n\n        "
+
+# Language selection
+msgid "Language"
+msgstr "Language"
+
+msgid "Select Language"
+msgstr "Select Language"

@@ -1,0 +1,177 @@
+# FakeFlac Lossless Audio Checker Translation Template
+# Copyright (C) 2023
+# This file is distributed under the same license as the FakeFlac package.
+
+msgid ""
+msgstr ""
+"Project-Id-Version: FakeFlac 1.0\n"
+"POT-Creation-Date: 2023-07-01 12:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# Main UI
+msgid "Lossless audio checker"
+msgstr ""
+
+msgid "Choose option"
+msgstr ""
+
+msgid "Compare audio \nwith its fake high resolution"
+msgstr ""
+
+msgid "Limit audio to 45s"
+msgstr ""
+
+msgid "Choose Bitrate\n Default=320k"
+msgstr ""
+
+msgid "Selected bitrate:"
+msgstr ""
+
+msgid "To check lossless audio do not change\ndefault bitrate"
+msgstr ""
+
+msgid "Open spectogram for one file"
+msgstr ""
+
+msgid "How it works"
+msgstr ""
+
+msgid "Your audio file:"
+msgstr ""
+
+msgid "Converted file:"
+msgstr ""
+
+msgid "Play the differnce between High-Low res audio:"
+msgstr ""
+
+# Status messages
+msgid "Opening the difference audio, please wait"
+msgstr ""
+
+msgid "Choose audio file for lossles check"
+msgstr ""
+
+msgid "Open new file, which will be converted to this bitrate"
+msgstr ""
+
+msgid "Opening original audio"
+msgstr ""
+
+msgid "Limiting audio to 45seconds"
+msgstr ""
+
+msgid "Whole audio selected"
+msgstr ""
+
+msgid "Opening fake \"Lossless\" audio\nSometimes takes a little longer"
+msgstr ""
+
+msgid "Saving lower-quiality audio"
+msgstr ""
+
+msgid " Succesfully Saved"
+msgstr ""
+
+msgid "Error while saving audio"
+msgstr ""
+
+msgid "No file was selected"
+msgstr ""
+
+msgid "Opening: "
+msgstr ""
+
+msgid " and calculating spectograms\nPlease wait"
+msgstr ""
+
+msgid "Done, duration: "
+msgstr ""
+
+msgid " seconds\nChoose an option or open new file"
+msgstr ""
+
+msgid "Most used highest frequencies (from 14KHz+): "
+msgstr ""
+
+msgid "\nThis value should be higher"
+msgstr ""
+
+msgid "Too small frequencies found"
+msgstr ""
+
+msgid "Most used highest frequencies (from "
+msgstr ""
+
+msgid "KHz+): "
+msgstr ""
+
+msgid "\nThis value should be lower"
+msgstr ""
+
+msgid "Opening spectogram for file: "
+msgstr ""
+
+# File dialogs
+msgid "Audio Files"
+msgstr ""
+
+msgid "All Files"
+msgstr ""
+
+msgid "MP3 files"
+msgstr ""
+
+# Examples and help
+msgid "Example of lossless audio: (Up to 22KHz)"
+msgstr ""
+
+msgid "Example of lossy compression (196k) (Up to 19KHz):"
+msgstr ""
+
+msgid "Show me example of lossles audio check (Real flac)"
+msgstr ""
+
+msgid "Show me example of lossy audio check (Fake flac)"
+msgstr ""
+
+msgid "Example of lossless audio check:"
+msgstr ""
+
+msgid "Example of lossy (fake flac)audio check:"
+msgstr ""
+
+msgid "Back"
+msgstr ""
+
+msgid "Show me example"
+msgstr ""
+
+# Help text
+msgid """ There is no way to check if audio is truly lossless if you do not have the original file\n
+One way to determine this is by looking at the spectrogram of the file and finding the cutoff.\n\n
+Some audio files have a lower cutoff frequency, but this doesn't mean they're not lossless.\n
+This program compares the spectrogram of your audio file to a fake "lossless" version.\n
+If there's a difference, the audio file is likely lossless.\n
+Most used highest friequencies are also displayed, if these values match you are probably dealing with fake lossless compression.\n\n
+Use the "Compare audio with its fake resolution" option for this. You can limit the audio to 45 seconds for faster processing.\n\n
+!!Please note that changing the bitrate to lower settings won't show you if the audio is truly lossless!!\n\n
+You can play both the original and the lower-quality audio and save the lower-quality audio as an MP3 file.\n
+You can play the difference between those two (+- What you are missing by compressing the audio)\n\n
+You can also view the spectrogram of a single file using the "Open spectrogram for one file" option.\n
+\n
+\n
+        """
+msgstr ""
+
+# Language selection
+msgid "Language"
+msgstr ""
+
+msgid "Select Language"
+msgstr ""

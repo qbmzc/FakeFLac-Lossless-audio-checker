@@ -1,0 +1,165 @@
+# FakeFlac Lossless Audio Checker Chinese Translation
+# Copyright (C) 2023
+# This file is distributed under the same license as the FakeFlac package.
+
+msgid ""
+msgstr ""
+"Project-Id-Version: FakeFlac 1.0\n"
+"POT-Creation-Date: 2023-07-01 12:00+0000\n"
+"PO-Revision-Date: 2023-07-01 12:00+0000\n"
+"Last-Translator: Auto <auto@example.com>\n"
+"Language-Team: Chinese\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# Main UI
+msgid "Lossless audio checker"
+msgstr "无损音频检测器"
+
+msgid "Choose option"
+msgstr "选择选项"
+
+msgid "Compare audio \nwith its fake high resolution"
+msgstr "比较音频\n与其伪高解析度版本"
+
+msgid "Limit audio to 45s"
+msgstr "限制音频为45秒"
+
+msgid "Choose Bitrate\n Default=320k"
+msgstr "选择比特率\n 默认=320k"
+
+msgid "Selected bitrate:"
+msgstr "已选择比特率："
+
+msgid "To check lossless audio do not change\ndefault bitrate"
+msgstr "检查无损音频请勿更改\n默认比特率"
+
+msgid "Open spectogram for one file"
+msgstr "打开单个文件的频谱图"
+
+msgid "How it works"
+msgstr "工作原理"
+
+msgid "Your audio file:"
+msgstr "您的音频文件："
+
+msgid "Converted file:"
+msgstr "转换后的文件："
+
+msgid "Play the differnce between High-Low res audio:"
+msgstr "播放高低解析度音频之间的差异："
+
+# Status messages
+msgid "Opening the difference audio, please wait"
+msgstr "正在打开差异音频，请稍候"
+
+msgid "Choose audio file for lossles check"
+msgstr "选择音频文件进行无损检查"
+
+msgid "Open new file, which will be converted to this bitrate"
+msgstr "打开新文件，将转换为此比特率"
+
+msgid "Opening original audio"
+msgstr "正在打开原始音频"
+
+msgid "Limiting audio to 45seconds"
+msgstr "限制音频为45秒"
+
+msgid "Whole audio selected"
+msgstr "已选择完整音频"
+
+msgid "Opening fake \"Lossless\" audio\nSometimes takes a little longer"
+msgstr "正在打开伪\"无损\"音频\n可能需要较长时间"
+
+msgid "Saving lower-quiality audio"
+msgstr "正在保存低质量音频"
+
+msgid " Succesfully Saved"
+msgstr " 保存成功"
+
+msgid "Error while saving audio"
+msgstr "保存音频时出错"
+
+msgid "No file was selected"
+msgstr "未选择文件"
+
+msgid "Opening: "
+msgstr "正在打开："
+
+msgid " and calculating spectograms\nPlease wait"
+msgstr " 并计算频谱图\n请稍候"
+
+msgid "Done, duration: "
+msgstr "完成，耗时："
+
+msgid " seconds\nChoose an option or open new file"
+msgstr " 秒\n选择一个选项或打开新文件"
+
+msgid "Most used highest frequencies (from 14KHz+): "
+msgstr "最常用的最高频率（从14KHz+开始）："
+
+msgid "\nThis value should be higher"
+msgstr "\n此值应该更高"
+
+msgid "Too small frequencies found"
+msgstr "发现的频率太小"
+
+msgid "Most used highest frequencies (from "
+msgstr "最常用的最高频率（从"
+
+msgid "KHz+): "
+msgstr "KHz+开始）："
+
+msgid "\nThis value should be lower"
+msgstr "\n此值应该更低"
+
+msgid "Opening spectogram for file: "
+msgstr "正在为文件打开频谱图："
+
+# File dialogs
+msgid "Audio Files"
+msgstr "音频文件"
+
+msgid "All Files"
+msgstr "所有文件"
+
+msgid "MP3 files"
+msgstr "MP3文件"
+
+# Examples and help
+msgid "Example of lossless audio: (Up to 22KHz)"
+msgstr "无损音频示例：（高达22KHz）"
+
+msgid "Example of lossy compression (196k) (Up to 19KHz):"
+msgstr "有损压缩示例（196k）（高达19KHz）："
+
+msgid "Show me example of lossles audio check (Real flac)"
+msgstr "显示无损音频检查示例（真实flac）"
+
+msgid "Show me example of lossy audio check (Fake flac)"
+msgstr "显示有损音频检查示例（伪flac）"
+
+msgid "Example of lossless audio check:"
+msgstr "无损音频检查示例："
+
+msgid "Example of lossy (fake flac)audio check:"
+msgstr "有损（伪flac）音频检查示例："
+
+msgid "Back"
+msgstr "返回"
+
+msgid "Show me example"
+msgstr "显示示例"
+
+# Help text
+msgid " There is no way to check if audio is truly lossless if you do not have the original file\n\nOne way to determine this is by looking at the spectrogram of the file and finding the cutoff.\n\n\nSome audio files have a lower cutoff frequency, but this doesn't mean they're not lossless.\n\nThis program compares the spectrogram of your audio file to a fake \"lossless\" version.\n\nIf there's a difference, the audio file is likely lossless.\n\nMost used highest friequencies are also displayed, if these values match you are probably dealing with fake lossless compression.\n\n\nUse the \"Compare audio with its fake resolution\" option for this. You can limit the audio to 45 seconds for faster processing.\n\n\n!!Please note that changing the bitrate to lower settings won't show you if the audio is truly lossless!!\n\n\nYou can play both the original and the lower-quality audio and save the lower-quality audio as an MP3 file.\n\nYou can play the difference between those two (+- What you are missing by compressing the audio)\n\n\nYou can also view the spectrogram of a single file using the \"Open spectrogram for one file\" option.\n\n\n\n\n        "
+msgstr " 如果您没有原始文件，则无法检查音频是否真正无损\n\n确定这一点的一种方法是查看文件的频谱图并找到截止频率。\n\n\n某些音频文件具有较低的截止频率，但这并不意味着它们不是无损的。\n\n该程序将您的音频文件的频谱图与伪\"无损\"版本进行比较。\n\n如果有差异，则音频文件可能是无损的。\n\n还显示最常用的最高频率，如果这些值匹配，您可能正在处理伪无损压缩。\n\n\n为此，请使用\"比较音频与其伪高解析度\"选项。您可以将音频限制为45秒以加快处理速度。\n\n\n!!请注意，将比特率更改为较低设置不会显示音频是否真正无损!!\n\n\n您可以播放原始音频和低质量音频，并将低质量音频保存为MP3文件。\n\n您可以播放这两者之间的差异（+- 压缩音频时丢失的内容）\n\n\n您还可以使用\"打开单个文件的频谱图\"选项查看单个文件的频谱图。\n\n\n\n\n        "
+
+# Language selection
+msgid "Language"
+msgstr "语言"
+
+msgid "Select Language"
+msgstr "选择语言"

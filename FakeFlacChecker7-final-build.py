@@ -8,6 +8,9 @@ import gc
 import atexit
 #import multiprocessing as mp
 
+# 导入国际化支持
+from i18n import _, setup_i18n, get_current_language, get_supported_languages, get_language_name
+
 #Graphics:
 import tkinter as tk
 from tkinter import filedialog
@@ -245,15 +248,15 @@ class MyGridLayout(GridLayout):
         temp_file_path = ""
 
         #Name:
-        self.insideleft.add_widget(Label(text='Lossless audio checker', size_hint=(1,.1),pos_hint={'x':0, 'y':.9}, bold='text', font_size='30sp'))
+        self.insideleft.add_widget(Label(text=_("Lossless audio checker"), size_hint=(1,.1),pos_hint={'x':0, 'y':.9}, bold='text', font_size='30sp'))
 
         #What the program is doing:
-        self.doing_text = "Choose option"   
+        self.doing_text = _("Choose option")   
         self.doing_label = Label(text=self.doing_text, size_hint=(.1, .1), pos_hint={'x': .0, 'y': 0}, color=(1,0,1,1))
         self.insideright.add_widget(self.doing_label)
 
         #Main audio compare button:
-        self.Compare = Button(text="Compare audio \nwith its fake high resolution",size_hint=(.6,.1),pos_hint={'x':.1, 'y':.8})
+        self.Compare = Button(text=_("Compare audio \nwith its fake high resolution"),size_hint=(.6,.1),pos_hint={'x':.1, 'y':.8})
         self.Compare.bind(on_press=self.ChooseSong)
         self.insideleft.add_widget(self.Compare)
 
@@ -263,7 +266,7 @@ class MyGridLayout(GridLayout):
         self.insideleft.add_widget(self.limit_to_45)
         self.limit_to_45_variable = False
 
-        self.label = Label(text="Limit audio to 45s", size_hint=(.4, .1), pos_hint={'x': .1, 'y': .7})
+        self.label = Label(text=_("Limit audio to 45s"), size_hint=(.4, .1), pos_hint={'x': .1, 'y': .7})
         self.insideleft.add_widget(self.label)
         
         #Choose bitrate for second audio: (Compare different bitrates)
@@ -276,23 +279,35 @@ class MyGridLayout(GridLayout):
             self.bitrate_dropdown.add_widget(btn)
 
         self.bitrate_dropdown.bind(on_select=self.update_selected_bitrate)
-        self.dropdown_button = Button(text='Choose Bitrate\n Default=320k', size_hint=(.6, .1), pos_hint={'x': .1, 'y': .6})
+        self.dropdown_button = Button(text=_("Choose Bitrate\n Default=320k"), size_hint=(.6, .1), pos_hint={'x': .1, 'y': .6})
         self.dropdown_button.bind(on_release=self.bitrate_dropdown.open)
 
-        self.bitrate_dropdown.bind(on_select=lambda instance, x: setattr(self.dropdown_button, 'text', "Selected bitrate:" + x))
+        self.bitrate_dropdown.bind(on_select=lambda instance, x: setattr(self.dropdown_button, 'text', _("Selected bitrate:") + x))
 
         self.insideleft.add_widget(self.dropdown_button)
-        self.insideleft.add_widget(Label(text="To check lossless audio do not change\ndefault bitrate", size_hint=(.4,.1), pos_hint={'x': .3, 'y': .5}))
+        self.insideleft.add_widget(Label(text=_("To check lossless audio do not change\ndefault bitrate"), size_hint=(.4,.1), pos_hint={'x': .3, 'y': .5}))
         
         #Spectogram for one file
-        self.bspecto = Button(text="Open spectogram for one file", size_hint=(.6,.1),pos_hint={'x':.1, 'y':.4})
+        self.bspecto = Button(text=_("Open spectogram for one file"), size_hint=(.6,.1),pos_hint={'x':.1, 'y':.4})
         self.bspecto.bind(on_press=self.OnlySpecButton)
         self.insideleft.add_widget(self.bspecto)
 
         #How to use:
-        self.help = Button(text="How it works", size_hint=(.6,.1),pos_hint={'x':.1, 'y':.3})
+        self.help = Button(text=_("How it works"), size_hint=(.6,.1),pos_hint={'x':.1, 'y':.3})
         self.help.bind(on_press=self.show_help)
         self.insideleft.add_widget(self.help)
+        
+        # 添加语言选择下拉菜单
+        self.language_dropdown = DropDown(size_hint=(.6, .1), pos_hint={'x': .2, 'y': .2})
+        languages = get_supported_languages()
+        for lang_code, lang_name in languages.items():
+            btn = Button(text=lang_name, size_hint_y=None, height=44)
+            btn.bind(on_release=lambda btn, lang_code=lang_code: self.change_language(lang_code, btn.text))
+            self.language_dropdown.add_widget(btn)
+
+        self.language_button = Button(text=_("Language"), size_hint=(.6, .1), pos_hint={'x': .1, 'y': .2})
+        self.language_button.bind(on_release=self.language_dropdown.open)
+        self.insideleft.add_widget(self.language_button)
 
         #For folder, fastest computation, shows only most highest frequencies found form 14kHz:
         #self.only_max_freq_button = Button(text="Calculate only\nhighest max frequencies", size_hint=(.6,.1), pos_hint={'x':.1, 'y':.2})
@@ -302,13 +317,13 @@ class MyGridLayout(GridLayout):
         #Play High res audio:
         self.playbutton = Button(background_normal='Icons-and-pictures/icons8-play-button-circled-100.png', size_hint=(None, None), pos_hint={'x': 0, 'y': .8})
         self.playbutton.bind(on_press=self.play_song)
-        self.audio_label = Label(text="Your audio file:", size_hint=(None, None), pos_hint={'x': 0.3, 'y': 0.8})
+        self.audio_label = Label(text=_("Your audio file:"), size_hint=(None, None), pos_hint={'x': 0.3, 'y': 0.8})
         
 
         #Play Fake high res audio:    (image from https://icons8.com/icon/YJ5CCqdcOBs2/play-button-circled)
         self.playbutton_fake = Button(background_normal='Icons-and-pictures/icons8-play-button-circled-100.png', size_hint=(None, None), pos_hint={'x': 0, 'y': .8},)
         self.playbutton_fake.bind(on_press=self.play_fake_song)
-        self.audio_label_fake = Label(text="Converted file:", size_hint=(None, None), pos_hint={'x': 0.2, 'y': 0.8})
+        self.audio_label_fake = Label(text=_("Converted file:"), size_hint=(None, None), pos_hint={'x': 0.2, 'y': 0.8})
 
         #Save icon for low-quality audio
         self.save_icon = Button(background_normal='Icons-and-pictures/icons8-save-90.png', size_hint=(None, None), pos_hint={'x': 0.5, 'y': .8})
@@ -317,7 +332,7 @@ class MyGridLayout(GridLayout):
         #Play difference between high and low quality aduio:
         self.play_difference_button = Button(background_normal='Icons-and-pictures/icons8-play-button-circled-100.png', size_hint=(None, None), pos_hint={'x': 0, 'y': .1},)
         self.play_difference_button.bind(on_press=self.play_difference)
-        self.play_difference_label = Label(text="Play the differnce between High-Low res audio:", size_hint=(None, None), pos_hint={'x': .4, 'y': .1})
+        self.play_difference_label = Label(text=_("Play the differnce between High-Low res audio:"), size_hint=(None, None), pos_hint={'x': .4, 'y': .1})
 
         self.add_widget(self.insideleft)
         self.add_widget(self.insidecenter)
@@ -329,10 +344,10 @@ class MyGridLayout(GridLayout):
 
     def play_difference(self, instance):
         """ Calls function to calculate difference between audio files and then plays it by default browser """
-        self.doing_text = "Opening the difference audio, please wait"
+        self.doing_text = _("Opening the difference audio, please wait")
         self.update_doing_text(self.doing_text)
         
-        def calculation_callback(dt):
+        def calculation_callback(dt):          
             global temp_file_path_of_difference
             if temp_file_path_of_difference != "" and os.path.exists(temp_file_path_of_difference):
                 play_audio_by_default_browser(temp_file_path_of_difference)
@@ -356,7 +371,7 @@ class MyGridLayout(GridLayout):
     def play_song(self, instance):
         """Button function=  Plays selected audio """
         if self.file_name != "":
-            self.doing_text = "Opening original audio"
+            self.doing_text = _("Opening original audio")
             self.update_doing_text(self.doing_text)
 
             def calculation_callback(dt):
@@ -380,7 +395,7 @@ class MyGridLayout(GridLayout):
         global temp_file_path
         print(temp_file_path)
         if temp_file_path != "":
-            self.doing_text = "Opening fake \"Lossless\" audio\nSometimes takes a little longer"
+            self.doing_text = _("Opening fake \"Lossless\" audio\nSometimes takes a little longer")
             self.update_doing_text(self.doing_text)
 
             def calculation_callback(dt):
@@ -392,22 +407,22 @@ class MyGridLayout(GridLayout):
     def save_mp3(self, instance):
         """ Button func = saves the lossy audio file """
         def save_mp3(temp_file_path):
-            self.doing_text = "Saving lower-quiality audio"
+            self.doing_text = _("Saving lower-quiality audio")
             self.update_doing_text(self.doing_text)
 
             def calculation_callback(dt):
                 root = tk.Tk()
                 root.withdraw()
 
-                file_path = filedialog.asksaveasfilename(defaultextension=".mp3", filetypes=[("MP3 files", "*.mp3")])
+                file_path = filedialog.asksaveasfilename(defaultextension=".mp3", filetypes=[(_("MP3 files"), "*.mp3")])
                 if file_path:
                     audio = AudioSegment.from_mp3(temp_file_path)
                     audio.export(file_path, format="mp3", bitrate=self.bitrate)
-                    self.doing_text = os.path.basename(file_path) + " Succesfully Saved"
+                    self.doing_text = os.path.basename(file_path) + _(" Succesfully Saved")
                     self.update_doing_text(self.doing_text)
 
                 else:
-                    self.doing_text = "Error while saving audio"
+                    self.doing_text = _("Error while saving audio")
                     self.update_doing_text(self.doing_text)
         
             Clock.schedule_once(calculation_callback, 0)    
@@ -419,14 +434,14 @@ class MyGridLayout(GridLayout):
         global temp_file_path, temp_file_path_of_difference
         root = tk.Tk()
         root.withdraw()
-        file_name = filedialog.askopenfilename(filetypes = (("Audio Files", "*.wav;*.flac;*.mp3;"), ("All Files", "*.*")))
+        file_name = filedialog.askopenfilename(filetypes = ((_("Audio Files"), "*.wav;*.flac;*.mp3;"), (_("All Files"), "*.*")))
         if file_name == "":
-            self.doing_text = "No file was selected"
+            self.doing_text = _("No file was selected")
             self.update_doing_text(self.doing_text)
         if file_name != "":
             self.file_name = file_name
             print(self.file_name)
-            self.doing_text = "Opening: " + os.path.basename(self.file_name) +" and calculating spectograms\nPlease wait"
+            self.doing_text = _("Opening: ") + os.path.basename(self.file_name) +_(" and calculating spectograms\nPlease wait")
             self.update_doing_text(self.doing_text)
 
             if self.widgetje:
@@ -465,7 +480,7 @@ class MyGridLayout(GridLayout):
 
                 end_time = time.time()
                 duration = end_time - start_time
-                self.doing_text = "Done, duration: " + str(int(duration)) + " seconds\nChoose an option or open new file"
+                self.doing_text = _("Done, duration: ") + str(int(duration)) + _(" seconds\nChoose an option or open new file")
                 self.update_doing_text(self.doing_text)
             
             Clock.schedule_once(calculation_callback, 0)
@@ -622,47 +637,47 @@ class MyGridLayout(GridLayout):
         
         self.insidecenter.clear_widgets()
         self.insideright.clear_widgets()
-        self.insidecenter.add_widget(Label(text="Example of lossless audio: (Up to 22KHz)", pos_hint={'x':0, 'y':.8}, size_hint=(1,.1)))
+        self.insidecenter.add_widget(Label(text=_("Example of lossless audio: (Up to 22KHz)"), pos_hint={'x':0, 'y':.8}, size_hint=(1,.1)))
         lossless = Image(source="Icons-and-pictures/Lossless-audio-example.png", pos_hint={'x':0, 'y':0}, size_hint=(1, 1))
         self.insidecenter.add_widget(lossless)
 
-        self.insideright.add_widget(Label(text="Example of lossy compression (196k) (Up to 19KHz):", pos_hint={'x':0, 'y':.8}, size_hint=(1,.1)))
+        self.insideright.add_widget(Label(text=_("Example of lossy compression (196k) (Up to 19KHz):"), pos_hint={'x':0, 'y':.8}, size_hint=(1,.1)))
         lossy = Image(source="Icons-and-pictures/Lossy-audio-example.png", pos_hint={'x':0, 'y':0}, size_hint=(1, 1))
         self.insideright.add_widget(lossy)
 
-        example_button = Button(text="Show me example of lossles audio check (Real flac)", pos_hint={'x':0.1, 'y':.1}, size_hint=(.8,.1))
+        example_button = Button(text=_("Show me example of lossles audio check (Real flac)"), pos_hint={'x':0.1, 'y':.1}, size_hint=(.8,.1))
         example_button.bind(on_press=self.show_difference_lossles)
         self.insidecenter.add_widget(example_button)
 
-        example_button2 = Button(text="Show me example of lossy audio check (Fake flac)", pos_hint={'x':0.1, 'y':.1}, size_hint=(.8,.1))
+        example_button2 = Button(text=_("Show me example of lossy audio check (Fake flac)"), pos_hint={'x':0.1, 'y':.1}, size_hint=(.8,.1))
         example_button2.bind(on_press=self.show_difference_lossy)
         self.insideright.add_widget(example_button2)
 
     def show_difference_lossles(self, instance):
         self.insidecenter.clear_widgets()
         self.insideright.clear_widgets()
-        self.insidecenter.add_widget(Label(text="Example of lossless audio check:", pos_hint={'x':0.5, 'y':.8}, size_hint=(1,.1)))
+        self.insidecenter.add_widget(Label(text=_("Example of lossless audio check:"), pos_hint={'x':0.5, 'y':.8}, size_hint=(1,.1)))
         lossless = Image(source="Icons-and-pictures/Lossless-audio-example1split1.png", pos_hint={'x':0, 'y':.0}, size_hint=(1, 1))
         self.insidecenter.add_widget(lossless)
 
         lossy = Image(source="Icons-and-pictures/Lossless-audio-example1split2.png", pos_hint={'x':0, 'y':0}, size_hint=(1, 1))
         self.insideright.add_widget(lossy)
 
-        example_button = Button(text="Back", pos_hint={'x':0.8, 'y':0}, size_hint=(.4,.1))
+        example_button = Button(text=_("Back"), pos_hint={'x':0.8, 'y':0}, size_hint=(.4,.1))
         example_button.bind(on_press=self.show_difference)
         self.insidecenter.add_widget(example_button)
         
     def show_difference_lossy(self, instance):
         self.insidecenter.clear_widgets()
         self.insideright.clear_widgets()
-        self.insidecenter.add_widget(Label(text="Example of lossy (fake flac)audio check:", pos_hint={'x':0.5, 'y':.8}, size_hint=(1,.1)))
+        self.insidecenter.add_widget(Label(text=_("Example of lossy (fake flac)audio check:"), pos_hint={'x':0.5, 'y':.8}, size_hint=(1,.1)))
         lossless = Image(source="Icons-and-pictures/Lossy-audio-example1split1.png", pos_hint={'x':0, 'y':.0}, size_hint=(1, 1))
         self.insidecenter.add_widget(lossless)
 
         lossy = Image(source="Icons-and-pictures/Lossy-audio-example1split2.png", pos_hint={'x':0, 'y':0}, size_hint=(1, 1))
         self.insideright.add_widget(lossy)
 
-        example_button = Button(text="Back", pos_hint={'x':0.8, 'y':0}, size_hint=(.4,.1))
+        example_button = Button(text=_("Back"), pos_hint={'x':0.8, 'y':0}, size_hint=(.4,.1))
         example_button.bind(on_press=self.show_difference)
         self.insidecenter.add_widget(example_button)
 
@@ -671,11 +686,11 @@ class MyGridLayout(GridLayout):
     def OnlySpecButton(self, instance):
         root = tk.Tk()
         root.withdraw()
-        self.file_name = filedialog.askopenfilename(filetypes = (("Audio Files", "*.mp3;*.wav;*.flac;"), ("All Files", "*.*")))
+        self.file_name = filedialog.askopenfilename(filetypes = ((_('Audio Files'), '*.mp3;*.wav;*.flac;'), (_('All Files'), '*.*')))
         print(self.file_name)
         
         if self.file_name != "":
-            self.doing_text = "Opening spectogram for file: " + os.path.basename(self.file_name)
+            self.doing_text = _("Opening spectogram for file: ") + os.path.basename(self.file_name)
             self.update_doing_text(self.doing_text)
             def calculation_callback(dt):
                 self.only_spectogram(self.file_name)
@@ -690,12 +705,32 @@ class MyGridLayout(GridLayout):
         plt.ylabel('Frequency [Hz]')
         plt.show()
 
+    # 添加语言切换功能
+    def change_language(self, lang_code, lang_name):
+        setup_i18n(lang_code)
+        self.language_button.text = _("Language")
+        self.language_dropdown.dismiss()
+        self.update_ui_texts()
+
+    def update_ui_texts(self):
+        # 更新所有UI文本
+        self.insideleft.children[-1].text = _("Lossless audio checker")
+        self.doing_text = _("Choose option")
+        self.doing_label.text = self.doing_text
+        self.Compare.text = _("Compare audio \nwith its fake high resolution")
+        self.label.text = _("Limit audio to 45s")
+        self.dropdown_button.text = _("Choose Bitrate\n Default=320k") if self.bitrate == "320k" else _("Selected bitrate:") + self.bitrate
+        self.bspecto.text = _("Open spectogram for one file")
+        self.help.text = _("How it works")
+        self.language_button.text = _("Language")
+        # 其他UI元素的文本将在使用时更新
+
     def show_help(self, instance):
         self.insidecenter.clear_widgets()
         self.insideright.clear_widgets()
         self.insideleft.remove_widget(self.play_difference_label)
 
-        help_text = """ There is no way to check if audio is truly lossless if you do not have the original file\n
+        help_text = _(""" There is no way to check if audio is truly lossless if you do not have the original file\n
 One way to determine this is by looking at the spectrogram of the file and finding the cutoff.\n\n
 Some audio files have a lower cutoff frequency, but this doesn't mean they're not lossless.\n
 This program compares the spectrogram of your audio file to a fake "lossless" version.\n
@@ -708,9 +743,9 @@ You can play the difference between those two (+- What you are missing by compre
 You can also view the spectrogram of a single file using the "Open spectrogram for one file" option.\n
 \n
 \n
-        """
+        """)
         
-        example_button = Button(text="Show me example", pos_hint={'x':0.4, 'y':.1}, size_hint=(.6,.1))
+        example_button = Button(text=_("Show me example"), pos_hint={'x':0.4, 'y':.1}, size_hint=(.6,.1))
         example_button.bind(on_press=self.show_difference)
         self.insidecenter.add_widget(example_button)
         
@@ -739,6 +774,9 @@ if __name__ == '__main__':
 
     plt.style.use('dark_background')
     plt.rcParams['text.color'] = 'white'
+    
+    # 初始化国际化支持
+    setup_i18n()
     
     LosslessAudioChecker().run()
     atexit.register(remove_temp_file)
