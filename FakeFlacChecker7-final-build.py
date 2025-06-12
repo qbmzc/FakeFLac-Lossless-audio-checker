@@ -851,7 +851,7 @@ if __name__ == '__main__':
         
     # 设置Kivy的字体回退机制
     from kivy.config import Config
-    Config.set('kivy', 'default_font', ['Roboto', 'data/fonts/NotoSansCJK-Regular.ttc'])
+    Config.set('kivy', 'default_font', ['Roboto', 'fonts/NotoSansSC-Regular.otf'])
 
 
     plt.style.use('dark_background')
